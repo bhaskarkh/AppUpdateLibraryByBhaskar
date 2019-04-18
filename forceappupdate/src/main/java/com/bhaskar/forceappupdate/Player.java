@@ -24,7 +24,7 @@ public class Player {
         this.b = b;
     }
 
-    public int sqr()
+    public int multi()
     {
         return this.a*this.b;
     }
