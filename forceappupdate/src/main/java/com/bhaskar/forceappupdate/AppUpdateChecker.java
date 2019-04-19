@@ -9,12 +9,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 
 
 public class AppUpdateChecker {
+    String TAG="AppUpdateCheckerLibrary";
 
     private Activity activity;
     public AppUpdateChecker(Activity activity) {
@@ -54,6 +56,7 @@ public class AppUpdateChecker {
                 }
             }
             String currentVersion = getCurrentVersion();
+            Log.d(TAG,"CurrentVAersion Installed= "+currentVersion);
             //If the versions are not the same
             if(!currentVersion.equals(latestVersion)&&latestVersion!=null){
                 final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -106,6 +109,7 @@ public class AppUpdateChecker {
                         .select(".hAyfc .htlgb")
                         .get(7)
                         .ownText();
+               Log.d(TAG,"Latest Version from Play Store= "+latestVersion);
                 return latestVersion;
             } catch (Exception e) {
                 return latestVersion;
