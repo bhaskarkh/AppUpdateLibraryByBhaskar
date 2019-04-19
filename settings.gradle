@@ -1,1 +1,1 @@
-include ':app', ':forceappupdate'
+include ':app', ':forceappupdate', ':divisionlibrary'
