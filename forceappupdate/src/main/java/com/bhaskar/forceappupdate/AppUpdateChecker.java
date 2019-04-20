@@ -63,7 +63,7 @@ public class AppUpdateChecker {
             super.onPostExecute(s);
 
             String currentVersion = getCurrentVersion();
-            Log.d(TAG,"CurrentVAersion Installed= "+currentVersion);
+            Log.d(TAG,"Current Version Installed= "+currentVersion);
             //If the versions are not the same
             if(!currentVersion.equals(latestVersion)&&latestVersion!=null){
 
