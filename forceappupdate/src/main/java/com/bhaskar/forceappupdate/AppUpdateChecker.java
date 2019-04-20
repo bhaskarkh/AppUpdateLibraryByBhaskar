@@ -1,15 +1,25 @@
 package com.bhaskar.forceappupdate;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
@@ -18,12 +28,18 @@ import org.jsoup.Jsoup;
 public class AppUpdateChecker {
     String TAG="AppUpdateCheckerLibrary";
 
+
+
+
+
     private Activity activity;
     public AppUpdateChecker(Activity activity) {
         this.activity = activity;
 
-
     }
+
+
+
     //current version of app installed in the device
     private String getCurrentVersion(){
         PackageManager pm = activity.getPackageManager();
@@ -59,6 +75,36 @@ public class AppUpdateChecker {
             Log.d(TAG,"CurrentVAersion Installed= "+currentVersion);
             //If the versions are not the same
             if(!currentVersion.equals(latestVersion)&&latestVersion!=null){
+
+                final Dialog epicDialog=new Dialog(activity);
+                epicDialog.setContentView(R.layout.app_update_layout);
+                ImageView btnYes=epicDialog.findViewById(R.id.yesUpdate);
+                ImageView btnNo=epicDialog.findViewById(R.id.noUpdate);
+                epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                epicDialog.show();
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Toast.makeText(FragmentMain.this,"Yes",Toast.LENGTH_SHORT).show();
+                        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id="+activity.getPackageName())));
+                        epicDialog.dismiss();
+
+
+                    }
+                });
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Toast.makeText(FragmentMain.this,"No",Toast.LENGTH_SHORT).show();
+                        epicDialog.dismiss();
+
+                    }
+                });
+
+
+
+
+                /* //
                 final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setTitle("An Update is Available");
                 builder.setMessage("Its better to update now");
@@ -78,11 +124,17 @@ public class AppUpdateChecker {
                 });
                 builder.setCancelable(false);
                 builder.show();
+                */
+
+
             }else {
                 if (manualCheck) {
                     Toast.makeText(activity, "No Update Available", Toast.LENGTH_SHORT).show();
                 }
             }
+            //
+
+
         }
         @Override
         protected void onPreExecute() {
