@@ -67,7 +67,7 @@ public class AppUpdateChecker {
             //If the versions are not the same
             if(!currentVersion.equals(latestVersion)&&latestVersion!=null){
 
-                final Dialog epicDialog=new Dialog(activity);
+             /*   final Dialog epicDialog=new Dialog(activity);
                 epicDialog.setContentView(R.layout.app_update_layout);
                 ImageView btnYes=epicDialog.findViewById(R.id.yesUpdate);
                 ImageView btnNo=epicDialog.findViewById(R.id.noUpdate);
@@ -92,10 +92,10 @@ public class AppUpdateChecker {
                     }
                 });
 
+*/
 
 
 
-                /* //
                 final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setTitle("An Update is Available");
                 builder.setMessage("Its better to update now");
@@ -115,7 +115,7 @@ public class AppUpdateChecker {
                 });
                 builder.setCancelable(false);
                 builder.show();
-                */
+
 
 
             }else {
