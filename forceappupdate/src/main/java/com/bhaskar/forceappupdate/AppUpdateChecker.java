@@ -61,16 +61,7 @@ public class AppUpdateChecker {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (manualCheck)
-            {
-                if (progressDialog!=null)
-                {
-                    if (progressDialog.isShowing())
-                    {
-                        progressDialog.dismiss();
-                    }
-                }
-            }
+
             String currentVersion = getCurrentVersion();
             Log.d(TAG,"CurrentVAersion Installed= "+currentVersion);
             //If the versions are not the same
